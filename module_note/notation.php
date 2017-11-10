@@ -41,11 +41,11 @@ if (isset ($_GET['stars'])){
 }
 ?>
     <div class="rating rating2"><!--
-        --><a href="?stars=5" title="Noter 5 étoiles">★</a><!--
-        --><a href="?stars=4" title="Noter 4 étoiles">★</a><!--
-        --><a href="?stars=3" title="Noter 3 étoiles">★</a><!--
-        --><a href="?stars=2" title="Noter 2 étoiles">★</a><!--
-        --><a href="?stars=1" title="Noter 1 étoile">★</a>
+        --><a href="?idPageTacos=<?=$idPageTacos?>&stars=5" title="Noter 5 étoiles">★</a><!--
+        --><a href="?idPageTacos=<?=$idPageTacos?>&stars=4" title="Noter 4 étoiles">★</a><!--
+        --><a href="?idPageTacos=<?=$idPageTacos?>&stars=3" title="Noter 3 étoiles">★</a><!--
+        --><a href="?idPageTacos=<?=$idPageTacos?>&stars=2" title="Noter 2 étoiles">★</a><!--
+        --><a href="?idPageTacos=<?=$idPageTacos?>&stars=1" title="Noter 1 étoile">★</a>
     </div>
 	<?php
 }?>

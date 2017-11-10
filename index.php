@@ -37,7 +37,7 @@
         });
 
         misterTacos.addListener('click', function() {
-          window.location.replace("./tacos/mistertacos.php");
+          window.location.replace("./tacos/pagetacos.php?idPageTacos=1");
         });
 
         var hamamet = new google.maps.Marker({
@@ -47,7 +47,7 @@
         });
 
         hamamet.addListener('click', function() {
-          window.location.replace("./tacos/hammamet.php");
+          window.location.replace("./tacos/pagetacos.php?idPageTacos=2");
         });
 
         map.addListener('center_changed', function() {
