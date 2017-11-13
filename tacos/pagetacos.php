@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
   <head>
@@ -38,7 +38,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Tacos in Lyon</a>
+        <a class="navbar-brand js-scroll-trigger" href="./../">Tacos in Lyon</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -61,17 +61,23 @@
       </div>
     </nav>
 
+	<?php
+	$querySelectPageTacos = $bdd->prepare("SELECT nom, description FROM page_tacos WHERE id = ".$idPageTacos);
+	$querySelectPageTacos->execute(); 
+	$pageTacos = $querySelectPageTacos->fetch();
+	?>
+	
     <header class="masthead text-center text-white d-flex">
       <div class="container my-auto">
         <div class="row">
           <div class="col-lg-10 mx-auto">
             <h1 class="text-uppercase">
-              <strong>Titre</strong>
+              <strong><?php echo $pageTacos[0]; ?></strong>
             </h1>
             <hr>
           </div>
           <div class="col-lg-8 mx-auto">
-            <p class="text-faded mb-5">Description</p>
+            <p class="text-faded mb-5" style="text-shadow: black 0.1em 0.1em 0.2em;"><?php echo $pageTacos[1]; ?></p>
           </div>
         </div>
       </div>
@@ -126,19 +132,19 @@
       </div>
       <div class="container">
 			<?php
-			$query = $bdd->prepare("SELECT nom, commentaire FROM commentaire WHERE idPageTacos = ". $idPageTacos);
-			$query->execute(); 
-			$result = $query -> fetchAll();
+			$querySelectPageTacosById = $bdd->prepare("SELECT nom, commentaire FROM commentaire WHERE idPageTacos = ". $idPageTacos);
+			$querySelectPageTacosById->execute(); 
+			$pageTacosById = $querySelectPageTacosById -> fetchAll();
 			?>
 			<div class="media-body">
 				<?php
-				if (empty($result))
+				if (empty($pageTacosById))
 				{
 					echo 'Pas de commentaire';
 				}
 				else
 				{
-					foreach( $result as $row ) {
+					foreach( $pageTacosById as $row ) {
 					?>
 						<h4><?php echo $row['nom']; ?></h4>
 						<?php echo $row['commentaire'];
@@ -171,103 +177,32 @@
     <section class="p-0" id="carte">
       <div class="container-fluid p-0">
         <div class="row no-gutters popup-gallery">
-          <div class="col-lg-4 col-sm-6">
-            <div class="portfolio-box" href="img/portfolio/fullsize/1.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/1.jpg" alt="">
-			  <div class="img-tacos">Appuyer pour découvrir ce tacos</div>
-              <div class="portfolio-box-caption">
-                <div class="portfolio-box-caption-content">
-                  <div class="project-category text-faded">
-                    Tacos 1
-                  </div>
-                  <div class="project-name">
-                    Ingrédients
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-lg-4 col-sm-6">
-            <div class="portfolio-box" href="img/portfolio/fullsize/1.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/1.jpg" alt="">
-			  <div class="img-tacos">Appuyer pour découvrir ce tacos</div>
-              <div class="portfolio-box-caption">
-                <div class="portfolio-box-caption-content">
-                  <div class="project-category text-faded">
-                    Tacos 2
-                  </div>
-                  <div class="project-name">
-                    Ingrédients
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>          
-          <div class="col-lg-4 col-sm-6">
-            <div class="portfolio-box" href="img/portfolio/fullsize/1.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/1.jpg" alt="">
-			  <div class="img-tacos">Appuyer pour découvrir ce tacos</div>
-              <div class="portfolio-box-caption">
-                <div class="portfolio-box-caption-content">
-                  <div class="project-category text-faded">
-                    Tacos 3
-                  </div>
-                  <div class="project-name">
-                    Ingrédients
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>          
-          <div class="col-lg-4 col-sm-6">
-            <div class="portfolio-box" href="img/portfolio/fullsize/1.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/1.jpg" alt="">
-			  <div class="img-tacos">Appuyer pour découvrir ce tacos</div>
-              <div class="portfolio-box-caption">
-                <div class="portfolio-box-caption-content">
-                  <div class="project-category text-faded">
-                    Tacos 4
-                  </div>
-                  <div class="project-name">
-                    Ingrédients
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-sm-6">
-            <div class="portfolio-box" href="img/portfolio/fullsize/1.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/1.jpg" alt="">
-			  <div class="img-tacos">Appuyer pour découvrir ce tacos</div>
-              <div class="portfolio-box-caption">
-                <div class="portfolio-box-caption-content">
-                  <div class="project-category text-faded">
-                    Tacos 5
-                  </div>
-                  <div class="project-name">
-                    Ingrédients
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-sm-6">
-            <div class="portfolio-box" href="img/portfolio/fullsize/1.jpg">
-              <img class="img-fluid" src="img/portfolio/thumbnails/1.jpg" alt="">
-			  <div class="img-tacos">Appuyer pour découvrir ce tacos</div>
-              <div class="portfolio-box-caption">
-                <div class="portfolio-box-caption-content">
-                  <div class="project-category text-faded">
-                    Tacos 6
-                  </div>
-                  <div class="project-name">
-                    Ingrédients
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+		  <?php
+			$querySelectTacosById = $bdd->prepare("SELECT nom, ingrédients, prix, lienImage FROM tacos WHERE idPageTacos = ". $idPageTacos);
+			$querySelectTacosById->execute(); 
+			$tacosById = $querySelectTacosById -> fetchAll();
+			foreach( $tacosById as $row ) {
+		  ?>
+			  <div class="col-lg-4 col-sm-6">
+				<div class="portfolio-box" href="img/portfolio/fullsize/1.jpg">
+				  <img class="img-fluid" src="<?php echo $row['lienImage']; ?>" alt="">
+				  <div class="img-tacos">Appuyer pour découvrir ce tacos</div>
+				  <div class="portfolio-box-caption">
+					<div class="portfolio-box-caption-content">
+					  <div class="project-category text-faded">
+						<?php echo $row['nom']; ?>
+					  </div>
+					  <div class="project-name">
+						Ingrédients : <?php echo $row['ingrédients']; ?>
+					  </div>
+					  <div class="project-name">
+						Prix : <?php echo $row['prix']; ?> €
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			<?php } ?>
         </div>
       </div>
     </section>
@@ -275,7 +210,7 @@
     <section class="bg-dark text-white" id="position">
       <div class="container text-center">
         <h2 class="mb-4">Position</h2>
-       <iframe class="img-fluid" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC-pJ2EoeWOOE6VODmB1mv3ivRyVp5LKaY&q=Mister+tacos,Lyon" allowfullscreen></iframe>
+       <iframe class="img-fluid" width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC-pJ2EoeWOOE6VODmB1mv3ivRyVp5LKaY&q=<?php echo $pageTacos[0]; ?>Lyon" allowfullscreen></iframe>
       </div>
     </section>
 

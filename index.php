@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
   <head>
     <title>Tacos In Lyon</title>
@@ -24,9 +24,12 @@
       function initMap() {
         var misterTacosLatlng = {lat: 45.770159, lng: 4.865939};
         var hamametLatlng = {lat: 45.7712109, lng: 4.8669937};
+        var planeteSandwichLatlng = {lat: 45.768106, lng: 4.830532};
+        var pozePizzaLatlng = {lat: 45.738052, lng: 4.864697};
+        var ainElFouaraLatlng = {lat: 45.772611, lng: 4.874139};
 
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 18,
+          zoom: 13,
           center: misterTacosLatlng 
         });
 
@@ -48,6 +51,36 @@
 
         hamamet.addListener('click', function() {
           window.location.replace("./tacos/pagetacos.php?idPageTacos=2");
+        });
+		
+		var planeteSandwich = new google.maps.Marker({
+          position: planeteSandwichLatlng,
+          map: map,
+          title: 'Planète Sandwich'
+        });
+
+        planeteSandwich.addListener('click', function() {
+          window.location.replace("./tacos/pagetacos.php?idPageTacos=3");
+        });
+		
+		var pozePizza = new google.maps.Marker({
+          position: pozePizzaLatlng,
+          map: map,
+          title: 'Poze Pizza'
+        });
+
+        pozePizza.addListener('click', function() {
+          window.location.replace("./tacos/pagetacos.php?idPageTacos=4");
+        });
+		
+		var ainElFouara = new google.maps.Marker({
+          position: ainElFouaraLatlng,
+          map: map,
+          title: 'Ain El Fouara'
+        });
+
+        ainElFouara.addListener('click', function() {
+          window.location.replace("./tacos/pagetacos.php?idPageTacos=5");
         });
 
         map.addListener('center_changed', function() {
