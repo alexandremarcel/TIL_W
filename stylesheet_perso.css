@@ -14,6 +14,8 @@
 	text-align:center;
 }
 
-.mb5{
-	border:1px dotted black;
+.description{
+	color:black;
+	font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+	background-color: #F05F40;
 }

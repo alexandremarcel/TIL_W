@@ -77,7 +77,7 @@
             <hr>
           </div>
           <div class="col-lg-8 mx-auto">
-            <p class="text-faded mb-5" style="text-shadow: black 0.1em 0.1em 0.2em;"><?php echo $pageTacos[1]; ?></p>
+            <p class="text-faded mb-5 description"><?php echo $pageTacos[1]; ?></p>
           </div>
         </div>
       </div>
