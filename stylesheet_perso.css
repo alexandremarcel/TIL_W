@@ -3,6 +3,7 @@
 	text-transform: uppercase;
 	border: none;
 	border-radius: 300px;
+	padding: 20px;
 	font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 	background-color: #F05F40;
 	border-color: #F05F40;
@@ -18,4 +19,15 @@
 	color:black;
 	font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 	background-color: #F05F40;
+}
+
+.infosutiles{
+	color: #F05F40;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.imgPageTacos{
+	color: #F05F40;
+	width:10%;
+	height:10%;
 }

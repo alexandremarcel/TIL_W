@@ -45,13 +45,16 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#carte">Carte</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#infosutiles">Informations utiles</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#notation">Notation</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#commentaire">Commentaire</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#carte">Carte</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#position">Position</a>
@@ -62,7 +65,7 @@
     </nav>
 
 	<?php
-	$querySelectPageTacos = $bdd->prepare("SELECT nom, description FROM page_tacos WHERE id = ".$idPageTacos);
+	$querySelectPageTacos = $bdd->prepare("SELECT nom, description, lienLogo FROM page_tacos WHERE id = ".$idPageTacos);
 	$querySelectPageTacos->execute(); 
 	$pageTacos = $querySelectPageTacos->fetch();
 	?>
@@ -72,16 +75,71 @@
         <div class="row">
           <div class="col-lg-10 mx-auto">
             <h1 class="text-uppercase">
-              <strong><?php echo $pageTacos[0]; ?></strong>
+              <strong><?php echo $pageTacos['nom'] ."	<img src='".$pageTacos['lienLogo']."' class='imgPageTacos'>"; ?></strong>
             </h1>
             <hr>
           </div>
           <div class="col-lg-8 mx-auto">
-            <p class="text-faded mb-5 description"><?php echo $pageTacos[1]; ?></p>
+            <p class="text-faded mb-5 description"><?php echo $pageTacos['description']; ?></p>
           </div>
         </div>
       </div>
-    </header>
+    </header>	
+
+    <section class="p-0" id="carte">
+      <div class="container-fluid p-0">
+        <div class="row no-gutters popup-gallery">
+		  <?php
+			$querySelectTacosById = $bdd->prepare("SELECT nom, ingrédients, prix, lienImage FROM tacos WHERE idPageTacos = ". $idPageTacos);
+			$querySelectTacosById->execute(); 
+			$tacosById = $querySelectTacosById -> fetchAll();
+			foreach( $tacosById as $row ) {
+		  ?>
+			  <div class="col-lg-4 col-sm-6">
+				<div class="portfolio-box" href="img/portfolio/fullsize/1.jpg">
+				  <img class="img-fluid" src="<?php echo $row['lienImage']; ?>" alt="">
+				  <div class="img-tacos">				  
+					  <?php echo $row['nom']; ?>				  
+					  <div class="project-category text-faded">
+						Appuyer pour découvrir ce tacos
+					  </div>					  
+				  </div>
+				  <div class="portfolio-box-caption">
+					<div class="portfolio-box-caption-content">
+					  <div class="project-name">
+						Ingrédients : <?php echo str_replace(";", "<br />", $row['ingrédients']); ?>
+					  </div>
+					  <div class="project-name">
+						Prix : <?php echo $row['prix']; ?> €
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			<?php } ?>
+        </div>
+      </div>
+    </section>
+	
+	<?php
+	$querySelectInfosUtiles = $bdd->prepare("SELECT horaires, telephone, adresse, codePostal, ville, lienLogo, wifi, livraison, reservationEnLigne, lienReservation, tv FROM page_tacos WHERE id = ".$idPageTacos);
+	$querySelectInfosUtiles->execute(); 
+	$infosUtiles = $querySelectInfosUtiles->fetch();
+	?>
+	<section class="bg-dark text-white" id="infosutiles">
+      <div class="container text-center">
+        <h2 class="mb-4">Informations utiles</h2>
+		<p class="infosutiles"><?php echo "Adresse : " . $infosUtiles['adresse'] . " " . $infosUtiles['codePostal'] . " " . $infosUtiles['ville']; ?></p>
+		<p class="infosutiles"><?php if ($infosUtiles['telephone'] != null){echo "Téléphone : " . $infosUtiles['telephone'];} ?></p>
+		<p class="infosutiles"><?php if ($infosUtiles['horaires'] != null){echo "Horaires : <br/>" . str_replace(";", "<br />", $infosUtiles['horaires']);} ?></p>
+		<p class="infosutiles">Services : <br/>
+		<?php if ($infosUtiles['wifi'] == 1){echo "<img src='./img/wifi.png' class='imgPageTacos'>";} ?>
+		<?php if ($infosUtiles['livraison'] == 1){echo "<img src='./img/livraison.png' class='imgPageTacos'>";} ?>
+		<?php if ($infosUtiles['tv'] == 1){echo "<img src='./img/tv.png' class='imgPageTacos'>";} ?><br/>
+		<?php if ($infosUtiles['reservationEnLigne'] == 1){echo "<a href='".$infosUtiles['lienReservation']."' target = '_blank'><img src='./img/reservation.png' class='imgPageTacos'><br/>Cliquer pour réserver</a>";} ?>
+		</p>
+      </div>
+    </section>
 
     <section class="bg-primary" id="notation">
       <div class="container">
@@ -171,39 +229,6 @@
 					</form>
 				</div>
 			</div>
-      </div>
-    </section>
-
-    <section class="p-0" id="carte">
-      <div class="container-fluid p-0">
-        <div class="row no-gutters popup-gallery">
-		  <?php
-			$querySelectTacosById = $bdd->prepare("SELECT nom, ingrédients, prix, lienImage FROM tacos WHERE idPageTacos = ". $idPageTacos);
-			$querySelectTacosById->execute(); 
-			$tacosById = $querySelectTacosById -> fetchAll();
-			foreach( $tacosById as $row ) {
-		  ?>
-			  <div class="col-lg-4 col-sm-6">
-				<div class="portfolio-box" href="img/portfolio/fullsize/1.jpg">
-				  <img class="img-fluid" src="<?php echo $row['lienImage']; ?>" alt="">
-				  <div class="img-tacos">Appuyer pour découvrir ce tacos</div>
-				  <div class="portfolio-box-caption">
-					<div class="portfolio-box-caption-content">
-					  <div class="project-category text-faded">
-						<?php echo $row['nom']; ?>
-					  </div>
-					  <div class="project-name">
-						Ingrédients : <?php echo $row['ingrédients']; ?>
-					  </div>
-					  <div class="project-name">
-						Prix : <?php echo $row['prix']; ?> €
-					  </div>
-					</div>
-				  </div>
-				</div>
-			  </div>
-			<?php } ?>
-        </div>
       </div>
     </section>
 
